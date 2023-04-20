@@ -34,6 +34,29 @@ def m_profit(arr):
     m = max(m, m_sub_arr(p, 0, len(p) - 1))
     return m
 
+def m_sub_arr_dp(arr):
+    s = 0
+    m = 0
+    for i in arr:
+        if s + i < i:
+            s = i
+        else:
+            s += i
+        if s > m:
+            m = s
+    return m
+
+
+def m_profit_dp(arr):
+    p = [arr[i] - arr[i - 1] for i in range(1, len(arr))]
+    m = 0
+    for i in range(1, len(p)):
+        s = m_sub_arr_dp(p[:i]) + m_sub_arr_dp(p[i:])
+        if s > m:
+            m = s
+    m = max(m, m_sub_arr_dp(p))
+    return m
+
 
 if __name__ == '__main__':
     arr1 = [4000, 6000, 1000, 4000, 2000, 5000]
@@ -41,7 +64,15 @@ if __name__ == '__main__':
     arr3 = [7000, 1000, 5000, 3000, 6000, 4000]
     arr4 = [5000, 4000, 3000, 2000, 1000]
 
+
+    print('Divide and conquer solution:')
     print(arr1, '->', m_profit(arr1))
     print(arr2, '->', m_profit(arr2))
     print(arr3, '->', m_profit(arr3))
     print(arr4, '->', m_profit(arr4))
+
+    print('DP solution:')
+    print(arr1, '->', m_profit_dp(arr1))
+    print(arr2, '->', m_profit_dp(arr2))
+    print(arr3, '->', m_profit_dp(arr3))
+    print(arr4, '->', m_profit_dp(arr4))
