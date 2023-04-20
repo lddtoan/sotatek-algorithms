@@ -31,9 +31,17 @@ def m_profit(arr):
         s = m_sub_arr(p, 0, i) + m_sub_arr(p, i + 1, len(p) - 1)
         if s > m:
             m = s
+    m = max(m, m_sub_arr(p, 0, len(p) - 1))
     return m
 
 
 if __name__ == '__main__':
     arr1 = [4000, 6000, 1000, 4000, 2000, 5000]
+    arr2 = [1000, 2000, 3000, 4000, 5000]
+    arr3 = [7000, 1000, 5000, 3000, 6000, 4000]
+    arr4 = [5000, 4000, 3000, 2000, 1000]
+
     print(arr1, '->', m_profit(arr1))
+    print(arr2, '->', m_profit(arr2))
+    print(arr3, '->', m_profit(arr3))
+    print(arr4, '->', m_profit(arr4))
